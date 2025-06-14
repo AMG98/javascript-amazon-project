@@ -25,7 +25,7 @@ products.forEach((product) => {
       </div>
 
       <div class="product-quantity-container">
-      <select>
+      <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -52,6 +52,9 @@ products.forEach((product) => {
       </button>
     </div>    
   `;
+  const quantitySelector = document.querySelector(
+  `.js-quantity-selector-${product.id}`
+);
 });
 
 document.querySelector('.js-products-grid')
@@ -71,11 +74,11 @@ document.querySelectorAll('.js-add-to-cart')
      });
 
      if(matchingItem) {
-        matchingItem.quantity += 1;
+      matchingItem.quantity += 1;
     } else {
-       cart.push({
-       productId: productId,
-       quantity: 1
+      cart.push({
+        productId: productId,
+        quantity: 1
     }); 
     }
 
@@ -89,3 +92,5 @@ document.querySelectorAll('.js-add-to-cart')
       .innerHTML = cartQuantity;
   });
 });
+
+
