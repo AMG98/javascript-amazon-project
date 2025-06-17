@@ -42,7 +42,7 @@ products.forEach((product) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
@@ -64,6 +64,7 @@ document.querySelector('.js-products-grid')
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
+
       // Produkt-ID aus dem Button holen
       const {productId} = button.dataset;
 
@@ -98,5 +99,14 @@ document.querySelectorAll('.js-add-to-cart')
       // Gesamtmenge im Warenkorb anzeigen
       document.querySelector('.js-cart-quantity')
         .innerHTML = cartQuantity;
+
+      // Added Message anzeigen wenn Produkt angeklickt wird
+
+      const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+      );
+
+      addedMessage.classList.add('js-added-message')
+      
     });
 });
