@@ -656,5 +656,35 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "id1",
+    image: "images/products/backpack.jpg",
+    name: "Adidas Backpack",
+    rating: {
+      stars: 4,
+      count: 1230
+    },
+    priceCents: 7999,
+    keywords: [
+      "backpack",
+      "hiking",
+      "outdoor"
+    ]
+  },
+  {
+    id: "id2",
+    image: "images/products/umbrella.jpg",
+    name: "Green Umbrella",
+    rating: {
+      stars: 3.5,
+      count: 3092
+    },
+    priceCents: 1995,
+    keywords: [
+      "umbrella",
+      "rain",
+      "outdoor"
+    ]
   }
 ];

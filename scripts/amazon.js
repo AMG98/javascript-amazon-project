@@ -65,7 +65,7 @@ document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
       // Produkt-ID aus dem Button holen
-      const productId = button.dataset.productId;
+      const {productId} = button.dataset;
 
       // Ausgewählte Menge aus dem Dropdown lesen
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
@@ -84,8 +84,8 @@ document.querySelectorAll('.js-add-to-cart')
         matchingItem.quantity += quantity;
       } else {
         cart.push({
-          productId: productId,
-          quantity: quantity
+          productId,
+          quantity
         });
       }
 
