@@ -60,6 +60,9 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
 
+  const timeoutIDs = {};  // Objekt, das pro Produkt-ID einen Timer speichert
+
+
 // Für jeden "Add to Cart"-Button einen Event-Listener hinzufügen
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
@@ -105,8 +108,18 @@ document.querySelectorAll('.js-add-to-cart')
       const addedMessage = document.querySelector(
       `.js-added-to-cart-${productId}`
       );
-
-      addedMessage.classList.add('js-added-message')
       
+      // Prüfen ob schon ein Timer für das Produkt läuft -> abbrechen
+      if(timeoutIDs[productId]) {
+        clearTimeout(timeoutIDs[productId]);
+      }
+
+      addedMessage.classList.add('js-added-message');
+
+      // Neuen Timer setzen und in timeoutIDs[productId] speichern
+      timeoutIDs[productId] = setTimeout(() => {
+        addedMessage.classList.remove('js-added-message');
+      }, 2000);
+       
     });
 });
