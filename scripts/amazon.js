@@ -2,13 +2,14 @@ import {cart} from '../data/cart.js';
 
 let productsHTML = '';
 
+// Für jedes Produkt HTML erzeugen und zu productsHTML hinzufügen
 products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
-      <div class="product-image-container">
+        <div class="product-image-container">
         <img class="product-image"
             src="${product.image}">
-      </div>
+        </div>
 
       <div class="product-name limit-text-to-2-lines">
         ${product.name}
@@ -16,78 +17,108 @@ products.forEach((product) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${product.rating.stars *10}.png">
+            src="images/ratings/rating-${product.rating.stars *10}.png">
         <div class="product-rating-count link-primary">
           ${product.rating.count}
         </div>
       </div>
 
-      <div class="product-price">
-      ${(product.priceCents / 100).toFixed(2)}
-      </div>
+        <div class="product-price">
+        ${(product.priceCents / 100).toFixed(2)}
+        </div>
 
-      <div class="product-quantity-container">
-      <select>
-          <option selected value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-      </select>
-      </div>
+        <div class="product-quantity-container">
+        <select>
+            <option selected value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        </div>
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
-      <img src="images/icons/checkmark.png">
-      Added
-      </div>
+        <div class="added-to-cart">
+        <img src="images/icons/checkmark.png">
+        Added
+        </div>
 
-      <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${product.id}">
-      Add to Cart
-      </button>
+        <button class="add-to-cart-button button-primary js-add-to-cart"
+        data-product-id="${product.id}">
+        Add to Cart
+        </button>
     </div>    
   `;
 });
 
-document.querySelector('.js-products-grid')
-  .innerHTML = productsHTML;
+document.querySelector('.js-products-grid').
+innerHTML = productsHTML;
 
+  const timeoutIDs = {};  // Objekt, das pro Produkt-ID einen Timer speichert
+
+
+// Für jeden "Add to Cart"-Button einen Event-Listener hinzufügen
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
-     const productId = button.dataset.productId; 
-     
-    let matchingItem;
 
-     cart.forEach((item) => {
-        if(productId === item.productId) {  
-          matchingItem = item;            
+      // Produkt-ID aus dem Button holen
+      const {productId} = button.dataset;
+
+      // Ausgewählte Menge aus dem Dropdown lesen
+      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      const quantity = Number(quantitySelector.value);
+
+      // Schauen, ob das Produkt schon im Warenkorb ist
+      let matchingItem;
+      cart.forEach((item) => {
+        if (productId === item.productId) {
+          matchingItem = item;
         }
-     });
+      });
 
      if(matchingItem) {
-      matchingItem.quantity += 1;
+        matchingItem.quantity += 1;
     } else {
-      cart.push({
-        productId: productId,
-        quantity: 1
+       cart.push({
+       productId: productId,
+       quantity: 1
     }); 
     }
 
-    let cartQuantity = 0;
+      // Gesamtmenge im Warenkorb berechnen
+      let cartQuantity = 0;
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+      });
 
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;  
+      // Gesamtmenge im Warenkorb anzeigen
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
+
+      // Added Message anzeigen wenn Produkt angeklickt wird
+
+      const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+      );
+      
+      // Prüfen ob schon ein Timer für das Produkt läuft -> abbrechen
+      if(timeoutIDs[productId]) {
+        clearTimeout(timeoutIDs[productId]);
+      }
+
+      addedMessage.classList.add('js-added-message');
+
+      // Neuen Timer setzen und in timeoutIDs[productId] speichern
+      timeoutIDs[productId] = setTimeout(() => {
+        addedMessage.classList.remove('js-added-message');
+      }, 2000);
+       
     });
-
-    document.querySelector('.js-cart-quantity')
-      .innerHTML = cartQuantity;
-  });
 });
