@@ -1,5 +1,6 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+
 
 let productsHTML = ''; // HTML für alle Produkte vorbereiten
 
@@ -50,37 +51,23 @@ products.forEach((product) => {
 // Generiertes HTML in die Seite einfügen
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-// Event Listener für alle "Add to Cart"-Buttons hinzufügen
-document.querySelectorAll('.js-add-to-cart').forEach((button) => {
-  button.addEventListener('click', () => {
-    const productId = button.dataset.productId; // Produkt-ID ermitteln
-
-    let matchingItem;
-
-    // Prüfen, ob Produkt bereits im Warenkorb vorhanden ist
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += 1; // Produktmenge im Warenkorb erhöhen
-    } else {
-      // Neues Produkt in den Warenkorb einfügen
-      cart.push({
-        productId: productId,
-        quantity: 1
-      });
-    }
-
-    // Gesamtanzahl aller Produkte im Warenkorb berechnen
+function updateCartQuantity() {
+// Gesamtanzahl aller Produkte im Warenkorb berechnen
     let cartQuantity = 0;
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
     });
 
     // Aktualisierte Warenkorb-Anzahl im Header anzeigen
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
+// Event Listener für alle "Add to Cart"-Buttons hinzufügen
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  button.addEventListener('click', () => {
+    const productId = button.dataset.productId; // Produkt-ID ermitteln
+    addToCart(productId);
+    updateCartQuantity();
+    
   });
 });
