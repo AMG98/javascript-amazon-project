@@ -1,11 +1,9 @@
-import {cart, addToCart} from '../data/cart.js';
-import {products} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
+import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
+import { products } from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
+let productsHTML = '';
 
-let productsHTML = ''; // HTML für alle Produkte vorbereiten
-
-// Für jedes Produkt HTML generieren und anhängen
 products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
@@ -49,30 +47,21 @@ products.forEach((product) => {
   `;
 });
 
-// Generiertes HTML in die Seite einfügen
 document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
 
 function updateCartQuantity() {
-// Gesamtanzahl aller Produkte im Warenkorb berechnen
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-
-    // Aktualisierte Warenkorb-Anzahl im Header anzeigen
-    document.querySelector('.js-cart-quantity')
-      .innerHTML = cartQuantity;
-      
+  const cartQuantity = calculateCartQuantity();
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
-  updateCartQuantity();
 
-// Event Listener für alle "Add to Cart"-Buttons hinzufügen
+// Initial anzeigen
+updateCartQuantity();
+
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
-    const productId = button.dataset.productId; // Produkt-ID ermitteln
+    const productId = button.dataset.productId;
     addToCart(productId);
     updateCartQuantity();
-    
   });
 });
