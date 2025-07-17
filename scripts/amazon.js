@@ -50,7 +50,8 @@ products.forEach((product) => {
 });
 
 // Generiertes HTML in die Seite einfügen
-document.querySelector('.js-products-grid').innerHTML = productsHTML;
+document.querySelector('.js-products-grid')
+  .innerHTML = productsHTML;
 
 function updateCartQuantity() {
 // Gesamtanzahl aller Produkte im Warenkorb berechnen
@@ -60,7 +61,8 @@ function updateCartQuantity() {
     });
 
     // Aktualisierte Warenkorb-Anzahl im Header anzeigen
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    document.querySelector('.js-cart-quantity')
+      .innerHTML = cartQuantity;
 }
 
 // Event Listener für alle "Add to Cart"-Buttons hinzufügen

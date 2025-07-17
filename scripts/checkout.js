@@ -108,3 +108,11 @@ document.querySelectorAll('.js-delete-link')
       container.remove();
     });
   });
+
+  let checkoutQuantity = 0;
+    cart.forEach((cartItem) => {
+      checkoutQuantity += cartItem.quantity;
+    });
+    
+document.querySelector('.js-return-to-home-link')
+  .innerHTML = `${checkoutQuantity} items`;

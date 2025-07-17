@@ -25,9 +25,9 @@ export function addToCart(productId) {
   });
 
   if (matchingItem) {
-    matchingItem.quantity += 1; // Produktmenge im Warenkorb erhöhen
+    matchingItem.quantity += 1; // Wenn Produkt im Warenkorb => Produktmenge im Warenkorb erhöhen
   } else {
-    // Neues Produkt in den Warenkorb einfügen
+    // Wenn Produkt nicht im Warenkarob => Neues Produkt in den Warenkorb hinzufügen
     cart.push({
       productId: productId,
       quantity: 1
