@@ -63,7 +63,9 @@ function updateCartQuantity() {
     // Aktualisierte Warenkorb-Anzahl im Header anzeigen
     document.querySelector('.js-cart-quantity')
       .innerHTML = cartQuantity;
+      
 }
+  updateCartQuantity();
 
 // Event Listener für alle "Add to Cart"-Buttons hinzufügen
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
