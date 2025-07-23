@@ -3,7 +3,7 @@ import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 let productsHTML = '';
-
+//Für jedes Produkt auf der Webseite wird ein HTML Code generiert
 products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
@@ -46,10 +46,10 @@ products.forEach((product) => {
     </div>    
   `;
 });
-
+//HTML Code wird auf die Seite hinzugefügt
 document.querySelector('.js-products-grid')
   .innerHTML = productsHTML;
-
+//Funktion updatet Warenkorbanzeige mit Gesamtmenge auf Startseite
 function updateCartQuantity() {
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
@@ -57,7 +57,7 @@ function updateCartQuantity() {
 
 // Initial anzeigen
 updateCartQuantity();
-
+//productId wird gespeichert wenn  Add To Cart geklickt wird. productId wird als Parameter für die Funktionen genutzt
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;

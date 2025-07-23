@@ -1,5 +1,6 @@
+//Der Warenkorb
 export let cart = JSON.parse(localStorage.getItem('cart'));
-
+//Wenn cart leer oder null ist (z. B. beim ersten Laden), wird ein Standard-Warenkorb gesetzt.
 if (!cart) {
   cart = [{
   productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -9,11 +10,11 @@ if (!cart) {
   quantity: 1
   }];
 }
-
+//Funktion speichert aktuellen Stand des Warenkorbs
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
-
+//Funktion fügt einen Artikel in den Warenkorb hinzu
 export function addToCart(productId) {
   let matchingItem;
 
@@ -36,7 +37,7 @@ export function addToCart(productId) {
 
   saveToStorage();
 }
-
+//Funktion entfernt Artikel aus dem Warenkorb
 export function removeFromCart(productId) {
   const newCart = [];
 
@@ -50,7 +51,7 @@ export function removeFromCart(productId) {
 
   saveToStorage();
 }
-
+//Funktion berechnet die Gesamtmenge im Warenkorb
 export function calculateCartQuantity() {
   let cartQuantity = 0;
   

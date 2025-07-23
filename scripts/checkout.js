@@ -8,7 +8,7 @@ cart.forEach((cartItem) => {
   const productId = cartItem.productId;
 
   let matchingProduct = products.find(product => product.id === productId);
-
+//HTML Code wird für jedes Matchingproduct generiert
   cartSummaryHTML += `
     <div class="cart-item-container 
       js-cart-item-container-${matchingProduct.id}">
