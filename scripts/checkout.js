@@ -88,17 +88,17 @@ cart.forEach((cartItem) => {
     </div>
   `;
 });
-
+//HTML Code wird auf die Seite gepackt
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
-
+//Funktion aktualisiert die Anzeige der Warenkorb-Anzahl.
 function updateCartQuantity() {
   const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
 }
 
 updateCartQuantity();
-
+//Alle "Delete"-Links löschen beim Klick das jeweilige Produkt.
 document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
