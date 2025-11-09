@@ -113,15 +113,17 @@ document.querySelectorAll('.js-delete-link')
       updateCartQuantity();
     });
   });
-//Alle Update Buttons lassen ein Editing Quantity Feld + Save Button erscheinen
+
 document.querySelectorAll('.js-update-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
 
+      //Alle Update Buttons lassen ein Editing Quantity Feld + Save Button erscheinen
       const container = document.querySelector(
       `.js-cart-item-container-${productId}`);
       container.classList.add('is-editing-quantity');
+      
     })
 
   })
