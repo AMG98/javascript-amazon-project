@@ -18,8 +18,7 @@ function saveToStorage() {
 export function addToCart(productId) {
   let matchingItem;
 
-  // Prüfen, ob Produkt bereits im Warenkorb vorhanden ist
-  cart.forEach((cartItem) => {
+  cart.forEach((cartItem) => {// Prüfen, ob Produkt bereits im Warenkorb vorhanden ist
     if (productId === cartItem.productId) {
       matchingItem = cartItem;
     }
@@ -28,8 +27,8 @@ export function addToCart(productId) {
   if (matchingItem) {
     matchingItem.quantity += 1; // Wenn Produkt im Warenkorb => Produktmenge im Warenkorb erhöhen
   } else {
-    // Wenn Produkt nicht im Warenkarob => Neues Produkt in den Warenkorb hinzufügen
-    cart.push({
+    
+    cart.push({ // Wenn Produkt nicht im Warenkorb=> Neues Produkt in den Warenkorb hinzufügen
       productId: productId,
       quantity: 1
     });
