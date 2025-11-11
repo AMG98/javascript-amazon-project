@@ -1,0 +1,30 @@
+[33m67221b2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Clean history
+[33m83a9614[m Merge branch 'main' of https://github.com/AMG98/javascript-amazon-project
+[33mc8598e2[m 14n
+[33m372c053[m 14m
+[33m80a5f21[m 14l
+[33mb0e8f6b[m 14k
+[33m844f92e[m 14j
+[33mfabc2d0[m 14i
+[33m6071fe5[m 14h
+[33md986543[m 14g
+[33m1226df9[m 14f
+[33m217abba[m Added another comments
+[33m4088bc6[m Added comments
+[33macf2605[m 14e
+[33m9c92107[m 14d
+[33m0e6728b[m 14c
+[33ma22b60e[m 14a+b
+[33mff8db6c[m Save cart in localStorage
+[33m1adbe32[m Delete products from HTML when clicking delete
+[33m9db99fe[m Delete products from cart when clicking delete
+[33mf6126be[m Fix price formatting and radio selectors
+[33mdf60801[m Generate HTML for the order summary
+[33mb2ffe68[m Move addToCart into cart.js
+[33mc75e3fa[m import products from products.js
+[33mea45897[m Use modules and import cart from cart.js
+[33mc8b3fd2[m Make the cart quantity interactive
+[33m682e976[m Make add to cart button interactive
+[33m12c44f4[m Use products.js file
+[33m4c40636[m Generate HTML with JavaScript
+[33m66c9d42[m Add the starting files
