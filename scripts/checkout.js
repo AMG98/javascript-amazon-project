@@ -99,6 +99,29 @@ function updateCartQuantity() {
   document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
 }
 
+function handleQuantitySave(productId, newQuantity) {
+  // 1. Validierung der Menge
+  if (newQuantity < 0 || newQuantity >= 1000) {
+    alert('Quantity muss mindestens 0 und kleiner als 1000 sein');
+    return;
+  }
+
+  // 2. Warenkorb-Daten aktualisieren
+  updateQuantity(productId, newQuantity);
+
+  // 3. Input-Feld ausblenden / normalen Zustand wiederherstellen
+  const container = document.querySelector(`.js-cart-item-container-${productId}`);
+  container.classList.remove('is-editing-quantity');
+
+  // 4. Sichtbare Menge (Quantity-Label) aktualisieren
+  const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+  quantityLabel.innerHTML = newQuantity;
+
+  // 5. Gesamtmenge im Warenkorb oben in der Navigation aktualisieren
+  updateCartQuantity();
+}
+
+
 updateCartQuantity();
 //Alle "Delete"-Links löschen beim Klick das jeweilige Produkt.
 document.querySelectorAll('.js-delete-link')
@@ -117,80 +140,58 @@ document.querySelectorAll('.js-delete-link')
 document.querySelectorAll('.js-update-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
+
       const productId = link.dataset.productId;
 
-      //Alle Update Buttons lassen ein Editing Quantity Feld + Save Button erscheinen
+      // Container des angeklickten Produkts holen
       const container = document.querySelector(
-      `.js-cart-item-container-${productId}`);
+        `.js-cart-item-container-${productId}`
+      );
+
+      // Klasse hinzufügen → zeigt das Input-Feld an
       container.classList.add('is-editing-quantity');
 
-    })
+      // Das Input-Feld innerhalb dieses Containers finden
+      const quantityInput = container.querySelector('.quantity-input');
 
-  })
+      // Verhindern, dass mehrere Enter-Listener angehängt werden
+      if (!quantityInput._hasEnterListener) {
 
-document.querySelectorAll('.js-save-link ')
-.forEach((link) => {
-  link.addEventListener('click', () => {
-    const productId = link.dataset.productId;
-     
-    const quantityInput = document.querySelector(
+        // Listener für die Enter-Taste
+        quantityInput.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            const newQuantity = Number(quantityInput.value);
+            handleQuantitySave(productId, newQuantity);
+          }
+        });
+
+        // Markieren: Dieser Input hat bereits einen Enter-Listener
+        quantityInput._hasEnterListener = true;
+      }
+    });
+  });
+
+
+document.querySelectorAll('.js-save-link')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+
+      const productId = link.dataset.productId;
+
+      // Das passende Input-Feld für dieses Produkt finden
+      const quantityInput = document.querySelector(
         `.js-quantity-input-${productId}`
       );
 
-      
-    const newQuantity = Number(quantityInput.value);
+      // Zahl aus dem Input-Feld lesen
+      const newQuantity = Number(quantityInput.value);
 
-    if(newQuantity < 0 || newQuantity >= 1000) {
-      alert('Quantity must be at least 0 and less than 1000');
-      return;
-    }
-
-    updateQuantity(productId, newQuantity);
-
-    const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-    container.classList.remove('is-editing-quantity');
+      // Die zentrale Funktion aufrufen
+      handleQuantitySave(productId, newQuantity);
+    });
+  });
 
 
-    const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-    quantityLabel.innerHTML = newQuantity;
-
-    updateCartQuantity();
-
-  })
-
-})
-
-/*
-quantityInput.addEventListener('keydown', (event) => {
-   if('Enter'=== event.key){
-     const productId = link.dataset.productId;
-     
-    const quantityInput = document.querySelector(
-        `.js-quantity-input-${productId}`
-      );
-
-      
-    const newQuantity = Number(quantityInput.value);
-
-    if(newQuantity < 0 || newQuantity >= 1000) {
-      alert('Quantity must be at least 0 and less than 1000');
-      return;
-    }
-
-    updateQuantity(productId, newQuantity);
-
-    const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-    container.classList.remove('is-editing-quantity');
 
 
-    const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-    quantityLabel.innerHTML = newQuantity;
 
-    updateCartQuantity(); 
-    } 
-})
-    */
