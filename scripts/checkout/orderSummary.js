@@ -6,6 +6,7 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js'
 import {renderPaymentSummary} from './paymentSummary.js';
 
+
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
 
@@ -232,6 +233,21 @@ export function renderOrderSummary() {
 
 
 
-const date2 = dayjs();
 
-console.log(date2.format('dddd'));
+
+function isWeekend(date) {
+  const dayOfWeek = date.format('dddd');
+  return dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday'
+}
+
+let date = dayjs();
+console.log(date.format('dddd, MMMM D'));
+console.log(isWeekend(date));
+
+date = dayjs().add(1, 'day');
+console.log(date.format('dddd, MMMM D'));
+console.log(isWeekend(date));
+
+date = dayjs().add(3, 'day');
+console.log(date.format('dddd, MMMM D'));
+console.log(isWeekend(date));
