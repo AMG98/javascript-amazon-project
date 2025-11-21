@@ -231,7 +231,7 @@ export function renderOrderSummary() {
 }
 
 
-const today2 = dayjs();
-const date2 = today2.subtract(1, 'month');
 
-console.log(date2.format('MMMM D'));
+const date2 = dayjs();
+
+console.log(date2.format('dddd'));
