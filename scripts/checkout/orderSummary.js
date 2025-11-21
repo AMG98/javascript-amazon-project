@@ -230,3 +230,8 @@ export function renderOrderSummary() {
     });
 }
 
+
+const today2 = dayjs();
+const date2 = today2.add(5, 'days');
+
+console.log(date2.format('MMMM D'));
