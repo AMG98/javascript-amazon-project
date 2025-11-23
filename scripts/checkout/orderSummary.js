@@ -206,6 +206,7 @@ export function renderOrderSummary() {
 
           // Markieren: Dieser Input hat bereits einen Enter-Listener
           quantityInput._hasEnterListener = true;
+
         }
       });
     });
@@ -227,6 +228,7 @@ export function renderOrderSummary() {
 
         // Die zentrale Funktion aufrufen
         handleQuantitySave(productId, newQuantity);
+        renderPaymentSummary();
       });
     });
 }
