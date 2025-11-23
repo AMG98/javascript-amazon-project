@@ -231,23 +231,3 @@ export function renderOrderSummary() {
     });
 }
 
-
-
-
-
-function isWeekend(date) {
-  const dayOfWeek = date.format('dddd');
-  return dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday'
-}
-
-let date = dayjs();
-console.log(date.format('dddd, MMMM D'));
-console.log(isWeekend(date));
-
-date = dayjs().add(1, 'day');
-console.log(date.format('dddd, MMMM D'));
-console.log(isWeekend(date));
-
-date = dayjs().add(3, 'day');
-console.log(date.format('dddd, MMMM D'));
-console.log(isWeekend(date));
