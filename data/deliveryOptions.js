@@ -27,14 +27,23 @@ export function getDeliveryOption(deliveryOptionId) {
     return deliveryOption || deliveryOptions[0];
 }
 
+function isWeekend(date) {
+  const dayOfWeek = date.format('dddd');
+  return dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday'
+}
+
+
 export function calculateDeliveryDate(deliveryOption) {
-  const today = dayjs();
-  const deliveryDate = today.add(
-    deliveryOption.deliveryDays,
-    'days'
-  );
-  const dateString = deliveryDate.format(
-    'dddd, MMMM D'
-  );
-  return dateString
+  let remainingDays = deliveryOption.deliveryDays;
+  let date = dayjs();
+
+  while (remainingDays > 0) {
+    date = date.add(1, 'day');
+
+    if(isWeekend(date)) {
+    } else {
+      remainingDays = remainingDays - 1;
+    }
+  }
+  return date.format('dddd, MMMM D')
 }
