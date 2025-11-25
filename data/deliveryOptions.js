@@ -41,9 +41,9 @@ export function calculateDeliveryDate(deliveryOption) {
     date = date.add(1, 'day');
 
     if(isWeekend(date)) {
-    } else {
+      continue;
+    }
       remainingDays = remainingDays - 1;
     }
-  }
   return date.format('dddd, MMMM D')
-}
+  }

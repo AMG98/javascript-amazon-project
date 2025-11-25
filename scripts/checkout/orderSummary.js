@@ -186,7 +186,10 @@ export function renderOrderSummary() {
           quantityInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
               const newQuantity = Number(quantityInput.value);
-              handleQuantitySave(productId, newQuantity);
+              updateQuantity(productId, newQuantity);
+              renderCheckoutHeader();
+              renderOrderSummary();
+              renderPaymentSummary();
             }
           });
 
@@ -213,7 +216,9 @@ export function renderOrderSummary() {
         const newQuantity = Number(quantityInput.value);
 
         // Die zentrale Funktion aufrufen
-        handleQuantitySave(productId, newQuantity);
+        updateQuantity(productId, newQuantity);
+        renderCheckoutHeader();
+        renderOrderSummary();
         renderPaymentSummary();
       });
     });
