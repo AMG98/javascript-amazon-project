@@ -26,9 +26,14 @@ describe('test suite: renderOrderSummary', () => {
         deliveryOptionId: '2'
         }]);
     });
+
     loadFromStorage();
 
     renderOrderSummary();
+  });
+
+  afterEach(() => {
+    document.querySelector('.js-test-container') .innerHTML = '';
   });
 
   it('displays the cart', () => {
@@ -58,8 +63,6 @@ describe('test suite: renderOrderSummary', () => {
     ).not.toEqual(null);
     expect(cart.length).toEqual(1);
     expect(cart[0].productId).toEqual(productId2);
-
-    document.querySelector('.js-test-container') .innerHTML = '';
   });
 });
 
